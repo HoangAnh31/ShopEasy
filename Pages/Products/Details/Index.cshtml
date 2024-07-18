@@ -1,0 +1,41 @@
+﻿@page "{id:int}"
+@model ShopEasy.Pages.Products.Details.IndexModel
+@{
+    ViewData["Title"] = "Product Detail";
+}
+
+<h2 class="title-page">Product Detail</h2>
+
+<div class="product-details">
+    <div class="product-image">
+        <img src="@Model.product.ImageUrl" alt="@Model.product.Name" />
+    </div>
+    <div class="product-info">
+        <h2>@Model.product.Name</h2>
+        <p>@Model.product.Description</p>
+        <p><strong>Price:</strong> @Model.product.Price.ToString("C0")</p>
+        <p><strong>Available Stock:</strong> @Model.product.Stock</p>
+        <div class="button-controls">   
+            <form method="post" class="form-controls">
+                <input type="hidden" name="id" value="@Model.product.ProductId" />
+                <input type="hidden" name="name" value="@Model.product.Name" />
+                <input type="hidden" name="imageUrl" value="@Model.product.ImageUrl" />
+                <input type="hidden" name="price" value="@Model.product.Price" />
+                <div class="form-info">
+                    <div class="quantity-control">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control" />
+                    </div>
+                    <div class="btn-add-to-cart "> 
+                        <button type="submit" asp-page-handler="AddToCart" class="btn btn-primary ">Add to Cart</button>
+                    </div>
+                </div>               
+                
+            </form>
+            <div class="cart-page">
+                <a class="page-link btn btn-secondary" href="/cart/index">Proceed to Checkout</a>
+            </div>
+        </div>
+        
+    </div>
+</div>

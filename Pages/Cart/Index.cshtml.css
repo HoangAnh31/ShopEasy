@@ -1,0 +1,56 @@
+﻿.title-page {
+    margin-bottom: 30px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+    background: #f1f1f1;
+    padding: 10px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+.item p, .item .title {
+    margin:0;
+    padding:0;
+}
+.img {
+    max-width: 100px;
+
+}
+
+.img img {
+    width: 100%;
+}
+
+.total-cart {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.price {
+    width: 100px;
+}
+.title {
+    min-width: 200px;
+}
+
+.quantity {
+    width: 140px;
+}
+
+@media screen and (max-width: 767px){
+    .item {
+        flex-flow: row wrap;
+    }
+    .img, .title, .price, .quantity, .total, .remove {
+        width: 100%;
+    }
+    .title, .price, .quantity, .total, .remove {
+        margin-top: 10px !important;
+    }
+}

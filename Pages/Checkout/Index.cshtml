@@ -1,0 +1,53 @@
+﻿@page
+@model ShopEasy.Pages.Checkout.IndexModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2 class="title-page">Checkout</h2>
+
+<div class="container">
+    <div class="cart-infomation">
+        <h4>Order Summary</h4>
+        @foreach (var item in Model.Order.CartItems){
+            var total = item.Price * item.Quantity;
+            <div class="item">
+                <p class="img"><img src="@item.ImageURL" alt="@item.Name" /></p>
+                <p class="name">@item.Name</p>
+                <p class="quantity">@item.Quantity</p>
+                <p class="price">@total.ToString("C0")</p>
+            </div>
+        }
+        <div class="total-cart">Total: @Model.Order.TotalPrice.ToString("C0")</div>
+    </div>
+    <div class="customer-info">
+        <h4>Billing Infomation</h4>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.Order.Name">FullName: </label>
+                <input asp-for="@Model.Order.Name" class="form-control" />
+                <span asp-validation-for="@Model.Order.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Order.Email">Email: </label>
+                <input asp-for="@Model.Order.Email" class="form-control" />
+                <span asp-validation-for="@Model.Order.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Order.Address">Address: </label>
+                <input asp-for="@Model.Order.Address" class="form-control" />
+                <span asp-validation-for="@Model.Order.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Order.PhoneNumber">Phone: </label>
+                <input asp-for="@Model.Order.PhoneNumber" class="form-control" />
+                <span asp-validation-for="@Model.Order.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,53 @@
+﻿@page
+@model ShopEasy.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2 class="title-page">Products</h2>
+
+<div class="products-container">
+    <div class="search-input">
+        <form class="search-form" method="get">
+            <input type="text" name="inputString" value="@Model.searchString" id="inputString" placeholder="find your item" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <ul>
+        @foreach (var product in Model.Products)
+        {
+            <li>
+                <a class="item" asp-page="/products/details/index" asp-route-id="@product.ProductId">
+                    <p class="img"><img src="@product.ImageUrl" alt="@product.Name" /></p>
+                    <h3>@product.Name</h3>
+                    <p>Price: $@product.Price</p>
+                    <p>Description: @product.Description</p>
+                </a>
+            </li>
+        }
+    </ul>
+
+    <nav class="pagination-inner">
+        <div class="pagination">
+            @if (Model.pageIndex > 1)
+            {
+                <div class="page-item">
+                    <a class="page-link" href="?indexPage=@(Model.pageIndex - 1)&inputString=@Model.searchString">Previous</a>
+                </div>
+            }
+            @for (int i = 1; i <= Model.totalPages; i++)
+            {
+                <div class="page-item @(i == Model.pageIndex ? "active" : "")">
+                    <a class="page-link" href="?indexPage=@i&inputString=@Model.searchString">@i</a>
+                </div>
+            }
+            @if (Model.pageIndex < Model.totalPages)
+            {
+                <div class="page-item">
+                    <a class="page-link" href="?indexPage=@(Model.pageIndex + 1)&inputString=@Model.searchString">Next</a>
+                </div>
+            }
+        </div>
+    </nav>
+</div>
+
